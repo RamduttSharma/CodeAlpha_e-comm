@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>My Orders | E-Comm</title>
+    <link rel="stylesheet" href="css/orders.css" />
+</head>
+
+<body>
+    <header>
+        <div class="nav">
+            <h1><a href="index.html">E-Comm</a></h1>
+            <div>
+                <a href="index.html">Home</a>
+                <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+                <a href="profile.html">Profile</a>
+                <a href="orders.html">My Orders</a>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <h2>Your Orders</h2>
+        <div id="orders-list"></div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>About Us</h3>
+                <p>Your trusted e-commerce store for gadgets, accessories, and more. We offer quality products at the
+                    best prices.</p>
+            </div>
+
+            <div class="footer-section links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Profile</a></li>
+                    <li><a href="#">My Orders</a></li>
+                    <li><a href="#">Cart</a></li>
+                    <li><a href="#">Register</a></li>
+                    <li><a href="#">Login</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section legal">
+                <h3>Legal</h3>
+                <ul>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Return Policy</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section help">
+                <h3>Help & Support</h3>
+                <ul>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contact Support</a></li>
+                    <li><a href="#">Track Order</a></li>
+                    <li><a href="#">How to Order</a></li>
+                    <li><a href="#">Payment Options</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section contact">
+                <h3>Contact Us</h3>
+                <p>📞 <a href="tel:+917819884117">+91 7819884117</a></p>
+                <p>📧 <a href="mailto:support@yourstore.com">support@yourstore.com</a></p>
+                <div class="social-icons">
+                    <a href="https://www.linkedin.com/in/ramdutt-sharma-489755320?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"><img src="images/social/linkedin.png" alt="LinkedIn" /></a>
+                    <a href="https://www.instagram.com/_sharma_ji_726?igsh=MWN5Nmx1c3VlOWZlOQ=="><img src="images/social/instagram.png" alt="Instagram" /></a>
+                    <a href="https://www.facebook.com/ramdutt.sharma.77377"><img src="images/social/facebook.png" alt="Facebook" /></a>
+                    <a href="https://wa.me/qr/6ACBDDKUWGEHO1"><img src="images/social/whatsapp.png" alt="WhatsApp" /></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2025 YourStore | Designed with ❤️ by Ramdutt Sharma
+        </div>
+    </footer>
+
+    <script src="js/orders.js"></script>
+
+    <script>
+document.addEventListener("DOMContentLoaded", () => {
+    const links = document.querySelectorAll(".nav div a");
+    const currentPage = window.location.pathname.split("/").pop();
+
+    links.forEach(link => {
+        const href = link.getAttribute("href");
+        if (href === currentPage || (href === "index.html" && currentPage === "")) {
+            link.classList.add("active");
+        }
+    });
+});
+</script>
+
+</body>
+
+</html>
