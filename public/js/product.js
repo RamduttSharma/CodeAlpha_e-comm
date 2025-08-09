@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const box = document.getElementById("product-container");
 
             box.innerHTML = `
-                <img src="${product.image}" alt="${product.name}" width="200">
+                <img src="${product.images}" alt="${product.name}" width="200">
                 <h2>${product.name}</h2>
                 <p>${product.description}</p>
                 <h3>Price: ₹${product.price}</h3>
