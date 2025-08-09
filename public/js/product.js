@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     ${[1, 2, 3, 4, 5].map(i => `<option value="${i}">${i}</option>`).join("")}
                 </select>
                 <br>
-                <button onclick="addToCartAndGo('${product._id}', ${product.price}, '${product.name}', '${product.image}')">Add to Cart</button>
+                <button onclick="addToCartAndGo('${product._id}', ${product.price}, '${product.name}', '${product.images}')">Add to Cart</button>
                 <button onclick="location.href='index.html'">Back to Home</button>
             `;
         });

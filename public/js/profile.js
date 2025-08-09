@@ -3,19 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!token) return location.href = "login.html";
 
     fetch("/api/profile", {
-        Authorization: `Bearer ${token}` // ✅ fix here too
-
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
     })
         .then(res => res.json())
         .then(user => {
             document.getElementById("profile-info").innerHTML = `
-        <p><strong>Username:</strong> ${user.username}</p>
-        <p><strong>Email:</strong> ${user.email}</p>
-      `;
+                <p><strong>Username:</strong> ${user.username}</p>
+                <p><strong>Email:</strong> ${user.email}</p>
+            `;
         });
 
     updateCartCount();
 });
+
 
 function updatePassword() {
     const currentPasswordInput = document.getElementById("currentPassword");
