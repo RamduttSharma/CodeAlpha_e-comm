@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./db');
-const { seedProducts } = require('./controllers/productController'); // 👈 import seeding
+const { seedProductsOnStartup } = require('./controllers/productController'); // ✅ correct import
 require('dotenv').config();
 
 const app = express();
@@ -28,12 +28,12 @@ connectDB().then(async () => {
     console.log("✅ MongoDB connected");
 
     // 👉 Seed products automatically once
-    await seedProducts();
+    await seedProductsOnStartup();
 
     app.listen(PORT, () => {
         console.log(`🚀 Server running on http://localhost:${PORT}`);
     });
 }).catch(err => {
     console.error("❌ MongoDB connection error:", err);
-    process.exit(1); // exit if DB fails
+    process.exit(1);
 });

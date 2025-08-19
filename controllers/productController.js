@@ -1,7 +1,7 @@
-const Product = require('../models/Product');
+const Product = require('../models/product');
 
-// 👉 Seed products automatically on server startup
-async function seedProducts() {
+// 👉 Internal seeding function (no req/res, for startup)
+async function seedProductsInternal() {
     try {
         const count = await Product.countDocuments();
         if (count === 0) {
@@ -37,7 +37,7 @@ async function seedProducts() {
     }
 }
 
-// 👉 API endpoint version (trigger seeding manually)
+// 👉 API endpoint version (manual trigger via HTTP request)
 exports.seedProducts = async (req, res) => {
     try {
         const count = await Product.countDocuments();
@@ -45,14 +45,14 @@ exports.seedProducts = async (req, res) => {
             return res.status(400).json({ msg: "Products already exist in the database" });
         }
 
-        await seedProducts();
+        await seedProductsInternal();
         res.status(201).json({ msg: "Products inserted successfully" });
     } catch (err) {
         res.status(500).json({ msg: "Failed to insert products", error: err.message });
     }
 };
 
-// GET all products
+// 👉 GET all products
 exports.getAllProducts = async (req, res) => {
     try {
         const products = await Product.find().sort({ createdAt: -1 });
@@ -62,7 +62,7 @@ exports.getAllProducts = async (req, res) => {
     }
 };
 
-// GET product by ID
+// 👉 GET product by ID
 exports.getProductById = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
@@ -73,5 +73,5 @@ exports.getProductById = async (req, res) => {
     }
 };
 
-// 👉 Export startup seeding function for server.js
-exports.seedProductsOnStartup = seedProducts;
+// 👉 Export startup seeding function (for server.js)
+exports.seedProductsOnStartup = seedProductsInternal;
