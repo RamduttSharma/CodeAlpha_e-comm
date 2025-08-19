@@ -1,4 +1,3 @@
-// controllers/productController.js
 const Product = require('../models/Product');
 
 // 👉 Seed products automatically on server startup
@@ -38,6 +37,21 @@ async function seedProducts() {
     }
 }
 
+// 👉 API endpoint version (trigger seeding manually)
+exports.seedProducts = async (req, res) => {
+    try {
+        const count = await Product.countDocuments();
+        if (count > 0) {
+            return res.status(400).json({ msg: "Products already exist in the database" });
+        }
+
+        await seedProducts();
+        res.status(201).json({ msg: "Products inserted successfully" });
+    } catch (err) {
+        res.status(500).json({ msg: "Failed to insert products", error: err.message });
+    }
+};
+
 // GET all products
 exports.getAllProducts = async (req, res) => {
     try {
@@ -59,5 +73,5 @@ exports.getProductById = async (req, res) => {
     }
 };
 
-// 👉 Export seeding so we can call it from server.js
-exports.seedProducts = seedProducts;
+// 👉 Export startup seeding function for server.js
+exports.seedProductsOnStartup = seedProducts;
