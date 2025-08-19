@@ -1,13 +1,11 @@
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./db');
+const { seedProducts } = require('./controllers/productController'); // 👈 import seeding
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-
-// Connect to MongoDB
-connectDB();
 
 // Middleware
 app.use(cors());
@@ -25,6 +23,17 @@ app.get('/', (req, res) => {
     res.send("E-comm API is running...");
 });
 
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
+// Start server only after DB connects
+connectDB().then(async () => {
+    console.log("✅ MongoDB connected");
+
+    // 👉 Seed products automatically once
+    await seedProducts();
+
+    app.listen(PORT, () => {
+        console.log(`🚀 Server running on http://localhost:${PORT}`);
+    });
+}).catch(err => {
+    console.error("❌ MongoDB connection error:", err);
+    process.exit(1); // exit if DB fails
 });
